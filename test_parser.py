@@ -34,3 +34,13 @@ def test_user_ip():
     def fake_input(_):
         return 'a'
     assert user_ip(fake_input)=='a'
+
+def test_if_exit():
+    map_data,status = load_map("./test_data/test_map.json")
+    assert if_exit(map_data,'north') == True
+
+def test_if_exit_false():
+    map_data,status = load_map("./test_data/test_map.json")
+    assert if_exit(map_data,'south') == False
+
+
