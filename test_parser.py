@@ -62,3 +62,16 @@ def test_get_item_false(capsys):
     get_item(map_data,['get','lantern'],'Organ Room')
     out,err=capsys.readouterr()
     assert out == 'I wont let you get that lantern !\n'
+
+def test_use_item(capsys):
+    map_data,status = load_map("./test_data/test_map.json")
+    state['inventory']=['battered_ring']
+    use_item(map_data,['use', 'battered_ring'],'Laboratory')
+    out,err= capsys.readouterr()
+    assert out== 'You take out the Battered Ring etched with strange symbols, as you slowly try to place the ring in the index finger of the stone hand *thud* the ring gets fixed in the stone and you see a faint glow on the engravings of the ring, Suddenly you hear a *THUD* comming from downstaris near the Organ room.\n'
+
+def test_use_item_false(capsys):
+    map_data,status = load_map("./test_data/test_map.json")
+    state['inventory']=['battered_ring']
+    use_item(map_data,['use', 'battered_ring'],'Library')
+    out,err= capsys.readouterr()
