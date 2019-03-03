@@ -30,9 +30,19 @@ def load_map(maps):
             return map_data, True
         else:
             return '', False
+
+def Init_state(loaded_map):
+    
+    state['Current_Room'] = loaded_map[2]['Initial_Room']
+    state['Starting_Room'] = loaded_map[2]['Initial_Room']
+    state['items']=loaded_map[3]['items']
+    state['passive_item']=loaded_map[4]['passive item']
+    state['secret_room_status']=loaded_map[5]['secret_room_status']
+
     
 def engine():
     loaded_map,status = load_map(maps)
+    Init_state(loaded_map)
 
 if __name__=='__main__':
     script, maps = argv
