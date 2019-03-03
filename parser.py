@@ -66,6 +66,16 @@ def get_item(loaded_map,action,CurrentRoom):
     else:
         print('I wont let you get that {} !'.format(action[1]))
 
+def use_item(loaded_map,action,CurrentRoom):
+    ret=''
+    if action[1] in state['inventory'] and action[1] in loaded_map[1]['action'] and CurrentRoom in loaded_map[1]['action'][action[1]][0] :
+        ret=loaded_map[1]['action'][action[1]][1]
+        state['inventory'].remove(action[1])
+        print(ret)
+    else:
+        print('I wont let you use it')
+
+
 def engine():
     loaded_map,status = load_map(maps)
     Init_state(loaded_map)
