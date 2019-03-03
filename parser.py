@@ -58,6 +58,14 @@ def movement(loaded_map,action):
         ret = state['Current_Room']
         return ret
 
+def get_item(loaded_map,action,CurrentRoom):
+    
+    if action[1] == state['items'][0][CurrentRoom]:
+        state['inventory'].append(action[1])
+        state['items'][0][CurrentRoom]=''
+    else:
+        print('I wont let you get that {} !'.format(action[1]))
+
 def engine():
     loaded_map,status = load_map(maps)
     Init_state(loaded_map)
