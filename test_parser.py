@@ -43,4 +43,11 @@ def test_if_exit_false():
     map_data,status = load_map("./test_data/test_map.json")
     assert if_exit(map_data,'south') == False
 
+def test_movement_true():
+     map_data,status = load_map("./test_data/test_map.json")
+     assert movement(map_data,['move','north']) == 'Creeky Hallway'
+
+def test_movement_false():
+     map_data,status = load_map("./test_data/test_map.json")
+     assert movement(map_data,['move','south']) == 'Room 0'
 
