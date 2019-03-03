@@ -51,3 +51,14 @@ def test_movement_false():
      map_data,status = load_map("./test_data/test_map.json")
      assert movement(map_data,['move','south']) == 'Room 0'
 
+def test_get_item():
+    map_data,status = load_map("./test_data/test_map.json")
+    get_item(map_data,['get','lantern'],'Chapel')
+    assert state['inventory']== ['lantern']
+    assert state['items'][0]['Chapel'] == ''
+
+def test_get_item_false(capsys):
+    map_data,status = load_map("./test_data/test_map.json")
+    get_item(map_data,['get','lantern'],'Organ Room')
+    out,err=capsys.readouterr()
+    assert out == 'I wont let you get that lantern !\n'
