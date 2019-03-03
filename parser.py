@@ -39,7 +39,10 @@ def Init_state(loaded_map):
     state['passive_item']=loaded_map[4]['passive item']
     state['secret_room_status']=loaded_map[5]['secret_room_status']
 
-    
+def user_ip(input=input):
+    ret = input('>>')
+    return ret
+
 def engine():
     loaded_map,status = load_map(maps)
     Init_state(loaded_map)
