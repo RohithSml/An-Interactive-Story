@@ -66,9 +66,9 @@ def movement(loaded_map,action):
     elif state['secret_room_status']['access'] == True and state['Current_Room'] == state['secret_room_avl'][0]:
         ret=state['secret_room_avl'][1][action[1]]
         return ret
-    # elif state['End status'][1] == True and state['Current_Room'] == state['End direction'][0]:
-    #     ret=state['End direction'][1][action[1]]
-    #     return ret
+    elif state['End status'][1] == True and state['Current_Room'] == state['End direction'][0]:
+        ret=state['End direction'][1][action[1]]
+        return ret
     else:
         print('I dont see any exits that way.')
         ret = state['Current_Room']
@@ -93,8 +93,8 @@ def use_item(loaded_map,action,CurrentRoom):
             state['count']=state['count']+1
         if state['count'] ==2:
             state['secret_room_status']['access'] = True
-       # if CurrentRoom == state['End status'][0]:
-        #    state['End status'][1] = True
+        if CurrentRoom == state['End status'][0]:
+            state['End status'][1] = True
     else:
         print('I wont let you use it')
 
