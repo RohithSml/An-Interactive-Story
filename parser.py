@@ -48,6 +48,15 @@ def if_exit(loaded_map,exits):
         return True
     else:
         return False
+def movement(loaded_map,action):
+    ret=''
+    if if_exit(loaded_map,action[1]):
+        ret = loaded_map[0]['rooms'][state['Current_Room']][1][action[1]]
+        return  ret
+    else:
+        print('I dont see any exits that way.')
+        ret = state['Current_Room']
+        return ret
 
 def engine():
     loaded_map,status = load_map(maps)
