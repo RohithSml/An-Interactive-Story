@@ -43,6 +43,12 @@ def user_ip(input=input):
     ret = input('>>')
     return ret
 
+def if_exit(loaded_map,exits):
+    if exits in loaded_map[0]['rooms'][state['Current_Room']][1] :
+        return True
+    else:
+        return False
+
 def engine():
     loaded_map,status = load_map(maps)
     Init_state(loaded_map)
