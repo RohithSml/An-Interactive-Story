@@ -29,3 +29,8 @@ def test_initial_state():
         }
 
     assert state==estimate
+
+def test_user_ip():
+    def fake_input(_):
+        return 'a'
+    assert user_ip(fake_input)=='a'
