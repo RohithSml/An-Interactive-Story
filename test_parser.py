@@ -20,11 +20,11 @@ def test_initial_state():
 
         'passive_item' : ['lantern', 'Dusty Hallway'],
         
-        'secret_room_status' : [False, False],
+        'secret_room_status' : {'Laboratory':False, 'Library':False},
 
-        'secret_room_avl' :{'Organ Room':{'north' : 'Sceret Room','east':'Creeky Hallway'}},
+        'secret_room_avl' :['Organ Room',{'north' : 'Secret Room','east':'Creeky Hallway'}],
 
-        'End' :'To be continued'
+        'End' :'Room Zen'
 
         }
 
@@ -75,3 +75,16 @@ def test_use_item_false(capsys):
     state['inventory']=['battered_ring']
     use_item(map_data,['use', 'battered_ring'],'Library')
     out,err= capsys.readouterr()
+    assert out =='I wont let you use it\n'
+
+def test_for_secret_room_access():
+     map_data,status = load_map("./test_data/test_map.json")
+     state['inventory']=['skull','battered_ring']
+     state['secret_room_status']={'Laboratory':False, 'Library':False}
+     use_item(map_data,['use','skull'], 'Library')
+     assert state['secret_room_status']['Library']==True
+     use_item(map_data,['use','battered_ring'], 'Laboratory')
+     assert state['secret_room_status']=={'Laboratory':True, 'Library':True}
+
+     state['Current_Room']='Organ Room'
+     assert movement(map_data,['move','north']) == 'Secret Room'
