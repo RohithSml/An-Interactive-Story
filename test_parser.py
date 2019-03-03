@@ -95,3 +95,15 @@ def test_for_secret_room_access():
 
      state['Current_Room']='Organ Room'
      assert movement(map_data,['move','north']) == 'Secret Room'
+
+
+def test_for_EndRoom_acess():
+    map_data,status = load_map("./test_data/test_map.json")
+    state['inventory']=['sacrificial_dagger']
+    use_item(map_data,['use','sacrificial_dagger'],'Secret Room')
+    assert state['End status'][1]==True
+    
+    state['Current_Room']='Secret Room'
+    assert movement(map_data,['move','north']) == 'Room Zen'
+    
+    
