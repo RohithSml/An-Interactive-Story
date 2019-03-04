@@ -60,9 +60,9 @@ def if_exit(loaded_map,exits):
         return True
     else:
         return False
+
 def movement(loaded_map,action):
     ret=''
-    
     if if_exit(loaded_map,action[1]):
         ret = loaded_map[0]['rooms'][state['Current_Room']][1][action[1]]
         return  ret
@@ -138,6 +138,7 @@ def engine(maps):
             showStatus(loaded_map)
             state['Current_Room']= state['Starting_Room']
         if action[0]=='quit':
+            print('\n I dint expect that you were such a chicken..Too bad, GAME OVER.\n')
             break
         if action[0]=='help':
             instruction(loaded_map)
@@ -145,7 +146,7 @@ def engine(maps):
             continue
         if state['Current_Room']==state['End']:
             print(loaded_map[0]['rooms'][state['Current_Room']])
-            print('YOU WON')
+            print('\n You have reached the End of this Chapter. Thanks for Playing')
             break
 
 if __name__=='__main__':
