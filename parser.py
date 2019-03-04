@@ -103,8 +103,8 @@ def use_item(loaded_map,action,CurrentRoom):
         print('I wont let you use it')
 
 def showStatus(loaded_map):
-    print("You are in {}".format(state['Current_Room']))
-    print(loaded_map[0]['rooms'][state['Current_Room']][0])
+    print("\nYou are in {}\n".format(state['Current_Room']))
+    print(loaded_map[0]['rooms'][state['Current_Room']][0],'\n')
     print('Obtainables:  ', state['items'][0][state['Current_Room']])
     print('Your Inventory:  ', state['inventory'])
 
@@ -116,6 +116,10 @@ def not_have_passive_item(loaded_map):
     else:
         return False
 
+def instruction(loaded_map):
+    ret=loaded_map[12]['help']
+    print(ret)
+    
 def engine(maps):
     loaded_map,status = load_map(maps)
     Init_state(loaded_map)
@@ -126,24 +130,19 @@ def engine(maps):
         action=user.lower().split()
         if action[0] == 'move':
            state['Current_Room'] = movement(loaded_map,action)
-           
         if action[0] == 'get':
            get_item(loaded_map,action,state['Current_Room'])
-           
         if action[0]== 'use':
             use_item(loaded_map,action,state['Current_Room'])
-            
         if state['Current_Room']=='Coal Chute':
             showStatus(loaded_map)
             state['Current_Room']= state['Starting_Room']
-
         if action[0]=='quit':
             break
-
+        if action[0]=='help':
+            instruction(loaded_map)
         if  not_have_passive_item(loaded_map):
             continue
-        
-        
         if state['Current_Room']==state['End']:
             print(loaded_map[0]['rooms'][state['Current_Room']])
             print('YOU WON')
