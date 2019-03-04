@@ -25,6 +25,8 @@ state={ 'items': [],
 
         'End direction':[],
 
+        
+
         'End' :''
 
         }
@@ -87,6 +89,7 @@ def use_item(loaded_map,action,CurrentRoom):
     if action[1] in state['inventory'] and action[1] in loaded_map[1]['action'] and CurrentRoom in loaded_map[1]['action'][action[1]][0] :
         ret=loaded_map[1]['action'][action[1]][1]
         state['inventory'].remove(action[1])
+        loaded_map[0]['rooms'][CurrentRoom][0]=loaded_map[11]['Post Action Description'][CurrentRoom]
         print(ret)
         if CurrentRoom in state['secret_room_status']:
             state['secret_room_status'][CurrentRoom] = True
@@ -121,7 +124,9 @@ def engine(maps):
         if action[0]== 'use':
             use_item(loaded_map,action,state['Current_Room'])
             
-
+        if state['Current_Room']=='Coal Chute':
+            showStatus(loaded_map)
+            state['Current_Room']= state['Starting_Room']
         if state['Current_Room']==state['End']:
             print(loaded_map[0]['rooms'][state['Current_Room']])
             print('YOU WON')
