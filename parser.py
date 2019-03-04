@@ -62,6 +62,7 @@ def if_exit(loaded_map,exits):
         return False
 def movement(loaded_map,action):
     ret=''
+    
     if if_exit(loaded_map,action[1]):
         ret = loaded_map[0]['rooms'][state['Current_Room']][1][action[1]]
         return  ret
@@ -107,6 +108,14 @@ def showStatus(loaded_map):
     print('Obtainables:  ', state['items'][0][state['Current_Room']])
     print('Your Inventory:  ', state['inventory'])
 
+def not_have_passive_item(loaded_map):
+    if state['passive_item'][1]==state['Current_Room'] and state['passive_item'][0] not in state['inventory']:
+        state['Current_Room']= state['Starting_Room']
+        print(state['passive_item'][2])
+        return True
+    else:
+        return False
+
 def engine(maps):
     loaded_map,status = load_map(maps)
     Init_state(loaded_map)
@@ -127,6 +136,14 @@ def engine(maps):
         if state['Current_Room']=='Coal Chute':
             showStatus(loaded_map)
             state['Current_Room']= state['Starting_Room']
+
+        if action[0]=='quit':
+            break
+
+        if  not_have_passive_item(loaded_map):
+            continue
+        
+        
         if state['Current_Room']==state['End']:
             print(loaded_map[0]['rooms'][state['Current_Room']])
             print('YOU WON')
