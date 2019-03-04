@@ -18,7 +18,7 @@ def test_initial_state():
                 
         'inventory' : [],
 
-        'passive_item' : ['lantern', 'Dusty Hallway'],
+        'passive_item' :  ['lantern', 'Dusty Hallway','As you walked over to through next room, you loose your footing and fall down into a dark abyss'],
         
         'secret_room_status' : {'Laboratory':False, 'Library':False,'access':False},
 
@@ -105,5 +105,20 @@ def test_for_EndRoom_acess():
     
     state['Current_Room']='Secret Room'
     assert movement(map_data,['move','north']) == 'Room Zen'
+
+def test_for_not_having_passive_item():
+     map_data,status = load_map("./test_data/test_map.json")
+     state['Current_Room']= 'Dusty Hallway'
+     assert not_have_passive_item(map_data)== True
+
+def test_for_having_passive_item():
+    map_data,status = load_map("./test_data/test_map.json")
+    state['Current_Room']= 'Dusty Hallway'
+    state['inventory']=['lantern']
+    assert not_have_passive_item(map_data)== False
+     
+     
+    
+    
     
     
