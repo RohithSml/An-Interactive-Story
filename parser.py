@@ -32,6 +32,7 @@ state={ 'items': [],
         }
 
 def load_map(maps):
+    """Loads the .json file and returns the map_data and a status"""
     with  open(maps,"r") as read_file:
         map_data = json.load(read_file)
         if map_data != '':
@@ -40,6 +41,7 @@ def load_map(maps):
             return '', False
 
 def Init_state(loaded_map):
+    """It initializes the state from the loaded map"""
     state['Current_Room'] = loaded_map[2]['Initial_Room']
     state['Starting_Room'] = loaded_map[2]['Initial_Room']
     state['items']=loaded_map[3]['items']
@@ -52,16 +54,19 @@ def Init_state(loaded_map):
     state['secret_room_status']=loaded_map[10]['secret_room_status']
 
 def user_ip(input=input):
+    """Returns User Input"""
     ret = input('>>')
     return ret
 
 def if_exit(loaded_map,exits):
+    """Checks if there is an exit in the appropriate direction and Return a boolean value""" 
     if exits in loaded_map[0]['rooms'][state['Current_Room']][1] :
         return True
     else:
         return False
 
 def movement(loaded_map,action):
+    """Move the player to its apropriate room, also give access to secret room and ending room"""
     ret=''
     if if_exit(loaded_map,action[1]):
         ret = loaded_map[0]['rooms'][state['Current_Room']][1][action[1]]
@@ -78,7 +83,7 @@ def movement(loaded_map,action):
         return ret
 
 def get_item(loaded_map,action,CurrentRoom):
-    
+    """Gets the item from the state to its inventory"""    
     if action[1] == state['items'][0][CurrentRoom]:
         state['inventory'].append(action[1])
         state['items'][0][CurrentRoom]=''
@@ -86,6 +91,7 @@ def get_item(loaded_map,action,CurrentRoom):
         print('I wont let you get that {} !'.format(action[1]))
 
 def use_item(loaded_map,action,CurrentRoom):
+    """Uses the appropriate item in the designated room, checks secret room status, and controls its access token for the secret room and also give its Post Action Description"""
     ret=''
     if action[1] in state['inventory'] and action[1] in loaded_map[1]['action'] and CurrentRoom in loaded_map[1]['action'][action[1]][0] :
         ret=loaded_map[1]['action'][action[1]][1]
@@ -103,12 +109,14 @@ def use_item(loaded_map,action,CurrentRoom):
         print('I wont let you use it')
 
 def showStatus(loaded_map):
+    """Shows the Status of the player, including current position,inventory, obtainables etc"""
     print("\nYou are in {}\n".format(state['Current_Room']))
     print(loaded_map[0]['rooms'][state['Current_Room']][0],'\n')
     print('Obtainables:  ', state['items'][0][state['Current_Room']])
     print('Your Inventory:  ', state['inventory'])
 
 def not_have_passive_item(loaded_map):
+    """Checks if player does not have the passive item in inventory and return appropriate boolean value"""
     if state['passive_item'][1]==state['Current_Room'] and state['passive_item'][0] not in state['inventory']:
         state['Current_Room']= state['Starting_Room']
         print(state['passive_item'][2])
@@ -117,6 +125,7 @@ def not_have_passive_item(loaded_map):
         return False
 
 def instruction(loaded_map):
+    """Prints the Instructions"""
     ret=loaded_map[12]['help']
     print(ret)
     
@@ -138,7 +147,7 @@ def engine(maps):
             showStatus(loaded_map)
             state['Current_Room']= state['Starting_Room']
         if action[0]=='quit':
-            print('\n I dint expect that you were such a chicken..Too bad, GAME OVER.\n')
+            print('\n I dint expect that you were such a chicken..Too bad, GAME OVER.')
             break
         if action[0]=='help':
             instruction(loaded_map)
