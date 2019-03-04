@@ -74,7 +74,7 @@ def test_use_item(capsys):
     state['inventory']=['battered_ring']
     use_item(map_data,['use', 'battered_ring'],'Laboratory')
     out,err= capsys.readouterr()
-    assert out== 'You take out the Battered Ring etched with strange symbols, as you slowly try to place the ring in the index finger of the stone hand *thud* the ring gets fixed in the stone and you see a faint glow on the engravings of the ring, Suddenly you hear a *THUD* comming from downstaris near the Organ room.\n'
+    assert out== '\n\nYou take out the Battered Ring etched with strange symbols, as you slowly try to place the ring in the index finger of the stone hand *thud* the ring gets fixed in the stone and you see a faint glow on the engravings of the ring, Suddenly you hear a *THUD* comming from downstaris near the Organ room.\n\n'
 
 def test_use_item_false(capsys):
     map_data,status = load_map("./test_data/test_map.json")
@@ -116,6 +116,13 @@ def test_for_having_passive_item():
     state['Current_Room']= 'Dusty Hallway'
     state['inventory']=['lantern']
     assert not_have_passive_item(map_data)== False
+
+def test_for_instruction(capsys):
+    map_data,status = load_map("./test_data/test_map.json")
+    instruction(map_data)
+    out,err= capsys.readouterr()
+    assert out =='\n\n For movement use : move \n For picking up items to inventory use : get \n For using item use keyword : use \n\n'
+    
      
      
     
