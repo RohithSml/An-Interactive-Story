@@ -2,6 +2,7 @@ import sys
 from sys import argv
 import json
 import pprint
+import textwrap
 
 
 
@@ -99,7 +100,7 @@ def use_item(loaded_map,action,CurrentRoom):
 def showStatus(loaded_map):
     """Shows the Status of the player, including current position,inventory, obtainables etc"""
     print("\nYou are in {}\n".format(state['Current_Room']))
-    print(loaded_map[0]['rooms'][state['Current_Room']][0],'\n')
+    print(textwrap.fill(loaded_map[0]['rooms'][state['Current_Room']][0]))
     print('Obtainables:  ', state['items'][0][state['Current_Room']])
     print('Your Inventory:  ', state['inventory'])
 
