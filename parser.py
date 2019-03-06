@@ -28,7 +28,7 @@ def load_map(maps):
         else:
             return '', False
 
-def Init_state(loaded_map):
+def init_state(loaded_map):
     """It initializes the state from the loaded map"""
     state['Current_Room'] = loaded_map[2]['Initial_Room']
     state['Starting_Room'] = loaded_map[2]['Initial_Room']
@@ -119,7 +119,7 @@ def instruction(loaded_map):
     
 def engine(maps):
     loaded_map,status = load_map(maps)
-    Init_state(loaded_map)
+    init_state(loaded_map)
     while True:
         showStatus(loaded_map)
         user= user_ip()  
