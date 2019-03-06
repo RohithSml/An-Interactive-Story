@@ -23,7 +23,7 @@ def load_map(maps):
     """Loads the .json file and returns the map_data and a status"""
     with  open(maps,"r") as read_file:
         map_data = json.load(read_file)
-        if map_data != '':
+        if map_data != '': # You should probably raise an exception here. Not return ''
             return map_data, True
         else:
             return '', False
