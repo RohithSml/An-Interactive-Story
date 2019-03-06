@@ -5,6 +5,7 @@ import pprint
 
 
 
+# Use lower case keys for everything. Some are underscore separated. Some have spaces. etc.
 state={ 'items': [],
         'Starting_Room': '',
         'Current_Room' : '',
