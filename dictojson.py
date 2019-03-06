@@ -1,3 +1,7 @@
+# I wouldn't recommend that you type this by hand. Use a format that
+# you can easily edit like an excel sheet or some simple custom
+# format. Then write a parser for that.
+
 import json
 
 
