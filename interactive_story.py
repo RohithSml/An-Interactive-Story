@@ -11,9 +11,7 @@ def main():
 
     """)
 
-    time.sleep(1)
     print(mapss,': is loading.......\n\n')
-    time.sleep(2)
     print("""Welcome to this Interactive Story
 
       Controls:
