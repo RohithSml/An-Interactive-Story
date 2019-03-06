@@ -1,4 +1,4 @@
-from parser import *
+from parser import engine
 import time
 from sys import argv
 script,mapss = argv
