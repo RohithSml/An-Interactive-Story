@@ -6,29 +6,16 @@ import pprint
 
 
 state={ 'items': [],
-
         'Starting_Room': '',
-
         'Current_Room' : '',
-                
         'inventory' : [],
-
         'passive_item' : [],
-        
         'secret_room_status' : {},
-
         'secret_room_avl' :[],
-
         'count':0,
-
         'End status': [],
-
         'End direction':[],
-
-        
-
         'End' :''
-
         }
 
 def load_map(maps):
