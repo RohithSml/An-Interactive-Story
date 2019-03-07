@@ -1,4 +1,4 @@
-from parser import engine
+from is_parser import engine
 import time
 from sys import argv
 script,mapss = argv
@@ -14,13 +14,16 @@ def main():
     print(mapss,': is loading.......\n\n')
     print("""Welcome to this Interactive Story
 
-      Controls:
+      Controls: (type help to get controls)
 
       The Directions are 'north', 'south','east' and 'west'.
       For movement use the keyword: 'move', For example: move south
 
       For obtaining items for your inventory use keyword: 'get', For example: get cup
+
       For using items from inventory in that specific room use keyword: 'use', For example: use cup
+
+      For quitting the game use keyword: quit
     """)
     answer=input("Would you like to start ?. (y/n)")
     if answer in ['y','Y']:
