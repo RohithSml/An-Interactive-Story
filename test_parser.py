@@ -1,6 +1,6 @@
-from parser import *
+from is_parser import *
 from sys import argv
-
+import textwrap
 def test_loading_map():
     
     map_data,status = load_map("./test_data/test_map.json")
@@ -9,7 +9,7 @@ def test_loading_map():
     
 def test_initial_state():
     map_data,status = load_map("./test_data/test_map.json")
-    Init_state(map_data)
+    init_state(map_data)
     estimate={ 'items': [{'Room 0':'', 'Creeky Hallway':'','Dusty Hallway':'','Laboratory':'','Library':'','Secret Room':'','End':'','Coal Chute':'', 'Organ Room':'battered_ring', 'Chapel':'lantern', 'Conservatory':'skull', 'Bloody Room':'sacrificial_dagger'}],
 
         'Starting_Room': 'Room 0',
@@ -74,7 +74,11 @@ def test_use_item(capsys):
     state['inventory']=['battered_ring']
     use_item(map_data,['use', 'battered_ring'],'Laboratory')
     out,err= capsys.readouterr()
-    assert out== '\n\nYou take out the Battered Ring etched with strange symbols, as you slowly try to place the ring in the index finger of the stone hand *thud* the ring gets fixed in the stone and you see a faint glow on the engravings of the ring, Suddenly you hear a *THUD* comming from downstaris near the Organ room.\n\n'
+    assert out=="""  You take out the Battered Ring etched with strange symbols, as you
+slowly try to place the ring in the index finger of the stone hand
+*thud* the ring gets fixed in the stone and you see a faint glow on
+the engravings of the ring, Suddenly you hear a *THUD* comming from
+downstaris near the Organ room.\n"""
 
 def test_use_item_false(capsys):
     map_data,status = load_map("./test_data/test_map.json")
@@ -122,6 +126,7 @@ def test_for_instruction(capsys):
     instruction(map_data)
     out,err= capsys.readouterr()
     assert out =='\n\n For movement use : move \n For picking up items to inventory use : get \n For using item use keyword : use \n\n'
+
     
      
      
