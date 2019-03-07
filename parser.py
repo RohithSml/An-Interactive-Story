@@ -86,7 +86,7 @@ def use_item(loaded_map,action,CurrentRoom):
         ret=loaded_map[1]['action'][action[1]][1]
         state['inventory'].remove(action[1])
         loaded_map[0]['rooms'][CurrentRoom][0]=loaded_map[11]['Post Action Description'][CurrentRoom]
-        print(ret)
+        print(textwrap.fill(ret))
         if CurrentRoom in state['secret_room_status']:
             state['secret_room_status'][CurrentRoom] = True
             state['count']=state['count']+1
@@ -144,7 +144,7 @@ def engine(maps):
             continue
         if state['Current_Room']==state['End']:
             print(loaded_map[0]['rooms'][state['Current_Room']])
-            print('\n You have reached the End of this Chapter. Thanks for Playing')
+            print('\n You have reached the End of this Chapter. Thanks for Playing\n')
             break
 
 if __name__=='__main__':
