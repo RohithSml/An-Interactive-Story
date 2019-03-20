@@ -126,6 +126,9 @@ def engine(maps):
         user= user_ip()  
         action=''
         action=user.lower().split()
+        if len(action) == 1:
+            print('\n Type help for commands')
+            continue
         if action[0] == 'move':
            state['Current_Room'] = movement(loaded_map,action)
         if action[0] == 'get':
